@@ -97,7 +97,6 @@ int main(int argc, char** argv) {
    if (fareDurationMinute <= 0){
       totalFee = cancellationFee;
       totalFeeVatValue = totalFee - totalFee / (1 + VAT); // 1 = 100%
-      cout << totalFee << " " << totalFeeVatValue << endl;
    }
    else {
       //ask for fare km
@@ -109,15 +108,11 @@ int main(int argc, char** argv) {
       // calc sub total
       totalDistanceFee = fareKm * perKmFee;
       totalDurationFee = ceil(fareDurationMinute) * perMinuteFee;
-      
-      // debug line TODO REM
-      cout << "distance cout " << totalDistanceFee << endl << "duree cout " << totalDurationFee;
 
       totalFee = subTotalFee = baseFee + totalDistanceFee + totalDurationFee;
       // AFFICHER CONTENU FACTURE
       if (subTotalFee < minimumFee) {
          totalFee = minimumFee;
-         cout << totalFee;
          //AFFICHER LIGNE SUPP SI PRIX MINIMUM PAS DEPASSER
       }
       totalFeeVatValue = totalFee - totalFee / (1 + VAT);
@@ -141,7 +136,7 @@ int main(int argc, char** argv) {
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CORNER << setw(CANVAS_TOTAL_WIDTH / 2) << right << CORNER << endl; 
    cout << setfill(' ');
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
-   cout << setw(CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2) << left << LEFT_BORDER << setw(displayName.length()) << left << displayName << setw(CANVAS_TOTAL_WIDTH - (CANVAS_TOTAL_WIDTH / 2 + displayName.length() / 2)) << right << RIGHT_BORDER << endl; 
+   cout << setw(CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2) << left << LEFT_BORDER << setw(displayName.length()) << left << displayName << setw(CANVAS_TOTAL_WIDTH - (CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2 + displayName.length())) << right << RIGHT_BORDER << endl; 
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
    
    if (fareDurationMinute <= 0) {
@@ -150,8 +145,8 @@ int main(int argc, char** argv) {
    }
    else{
       // Affichage ILIAS
-      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Distance" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << fareKm << " " << RIGHT_BORDER << endl;
-      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " temps ecoule" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << fareDurationMinute << " " << RIGHT_BORDER << endl;
+      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Distance" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 4) << right << fareKm << " km " << RIGHT_BORDER << endl;
+      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " temps ecoule" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 5) << right << fareDurationMinute << " min " << RIGHT_BORDER << endl;
       cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix de base" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << baseFee << " " << RIGHT_BORDER << endl;
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix distance" << setw(CANVAS_INSIDE_COL_2_WIDTH) << ":" << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << totalDistanceFee << " " << RIGHT_BORDER << endl;
