@@ -95,8 +95,7 @@ int main() {
    if (fareDurationMinute <= 0) {
       totalFee = cancellationFee;
       totalFeeVatValue = totalFee - totalFee / (1 + VAT); // 1 = 100%
-   }
-   else {
+   } else {
       //ask for fare km
       cout << "Combien de kilometres parcourus?" << endl;
       cin >> fareKm;
@@ -123,48 +122,53 @@ int main() {
    const char LEFT_BORDER = '|';
    const char RIGHT_BORDER = LEFT_BORDER;
    const char COLUMN_SEPARATOR = ':';
-  
+
    const int CANVAS_TOTAL_WIDTH = 30; // Include border characters
    const float CANVAS_INSIDE_WIDTH = CANVAS_TOTAL_WIDTH - 2; // Without border characters 
    const int CANVAS_INSIDE_COL_2_WIDTH = 1; // COL_2 is the ":" => 1 character
    const int CANVAS_INSIDE_COL_1_WIDTH = 2 * roundf((CANVAS_INSIDE_WIDTH - CANVAS_INSIDE_COL_2_WIDTH) / 3); // COL_1 is the 2/3 (-1 => ":") of the CANVAS_INSIDE_WIDTH
    const int CANVAS_INSIDE_COL_3_WIDTH = CANVAS_INSIDE_WIDTH - (CANVAS_INSIDE_COL_1_WIDTH + CANVAS_INSIDE_COL_2_WIDTH); // COL_3 is the 1/3 of the CANVAS_INSIDE_WIDTH
+   
+   const int BILL_VALUE_PRECISION = 2; // 2 = 0.xx/ 3 = 0.xxx
 
    // HEADER
    cout << setfill(TOP_BORDER);
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CORNER << setw(CANVAS_TOTAL_WIDTH / 2) << right << CORNER << endl;
    cout << setfill(' ');
-   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
-   cout << setw(CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2) << left << LEFT_BORDER << setw(displayName.length()) << left << displayName << setw(CANVAS_TOTAL_WIDTH - (CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2 + displayName.length())) << right << RIGHT_BORDER << endl; 
-   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
-   
+   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+   cout << setw(CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2) << left << LEFT_BORDER << setw(displayName.length()) << left << displayName << setw(CANVAS_TOTAL_WIDTH - (CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2 + displayName.length())) << right << RIGHT_BORDER << endl;
+   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+
    if (fareDurationMinute <= 0) {
       // DISPLAY CANCELLATION FEE
-       cout << fixed << setprecision(2); // A VOIR (DUPLICATION)
+      cout << fixed << setprecision(BILL_VALUE_PRECISION);
+      
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Frais annulation" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << cancellationFee << " " << RIGHT_BORDER << endl;
-   }
-   else{
+   } else {
       // Affichage ILIAS
-      cout << fixed << setprecision(2); // A VOIR (DUPLICATION)
+
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Distance" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 4) << right << fareKm << " km " << RIGHT_BORDER << endl;
-      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " temps ecoule" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 5) << right << fareDurationMinute << " min " << RIGHT_BORDER << endl;
-      cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
+      cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " temps ecoule" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 5) << right << ceil(fareDurationMinute) << " min " << RIGHT_BORDER << endl;
+
+      cout << fixed << setprecision(BILL_VALUE_PRECISION);
+
+      cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix de base" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << baseFee << " " << RIGHT_BORDER << endl;
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix distance" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << totalDistanceFee << " " << RIGHT_BORDER << endl;
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix temps" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << totalDurationFee << " " << RIGHT_BORDER << endl;
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Total" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << subTotalFee << " " << RIGHT_BORDER << endl;
-      
+
       if (subTotalFee < minimumFee) {
-         cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
+         cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
          cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Course minimale" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << minimumFee << " " << RIGHT_BORDER << endl;
       }
    }
-  
+
    // FOOTER
-   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
+   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
    cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Prix" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << totalFee << " " << RIGHT_BORDER << endl;
    cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " (incl. TVA)" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << totalFeeVatValue << " " << RIGHT_BORDER << endl;
-   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl; 
+   cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
    cout << setfill(BOTTOM_BORDER);
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CORNER << setw(CANVAS_TOTAL_WIDTH / 2) << right << CORNER << endl;
 
