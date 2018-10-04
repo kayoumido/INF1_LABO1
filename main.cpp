@@ -23,30 +23,30 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-   
+
    const double VAT = 0.08; // 8%
-   
+
    const string UBERX_DISPLAY_NAME = "UBERX";
    const double UBERX_BASE_FARE = 3.00;
    const double UBERX_MINIMUM_FARE = 6.00;
    const double UBERX_PER_MINUTE_FEE = 0.30;
    const double UBERX_PER_KM_FEE = 1.80;
    const double UBERX_CANCELLATION_FEE = 6.00;
-   
+
    const string UBERBLACK_DISPLAY_NAME = "UBERBLACK";
    const double UBERBLACK_BASE_FARE = 8.00;
    const double UBERBLACK_MINIMUM_FARE = 15.00;
    const double UBERBLACK_PER_MINUTE_FEE = 0.60;
    const double UBERBLACK_PER_KM_FEE = 3.60;
    const double UBERBLACK_CANCELLATION_FEE = 10.00;
-   
+
    const string UBERPOP_DISPLAY_NAME = "UBERPOP";
    const double UBERPOP_BASE_FARE = 3.00;
    const double UBERPOP_MINIMUM_FARE = 6.00;
    const double UBERPOP_PER_MINUTE_FEE = 0.30;
    const double UBERPOP_PER_KM_FEE = 1.35;
    const double UBERPOP_CANCELLATION_FEE = 6.00;
-   
+
    string displayName;
    double baseFee;
    double minimumFee;
@@ -63,13 +63,13 @@ int main(int argc, char** argv) {
    cout << "Quel uber? Entrez 1 pour X, 2 pour POP ou 3 pour BLACK " << endl;
    unsigned short int serviceType;
    cin >> serviceType;
-   
+
    enum ServiceType {
       UBERX = 1,
       UBERPOP = 2,
       UBERBLACK = 3
    };
-   
+
    switch (serviceType) {
       case UBERX:
          displayName = UBERX_DISPLAY_NAME;
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
          cancellationFee = UBERBLACK_CANCELLATION_FEE;
          break;
    }
-   
+   cout << "Combien de minutes ecoulees? " << endl;
    double fareDurationMinute;
    cin >> fareDurationMinute;
 
@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
    const int CANVAS_INSIDE_COL_2_WIDTH = 1; // COL_2 is the ":" => 1 character
    const int CANVAS_INSIDE_COL_1_WIDTH = 2 * roundf((CANVAS_INSIDE_WIDTH - CANVAS_INSIDE_COL_2_WIDTH) / 3); // COL_1 is the 2/3 (-1 => ":") of the CANVAS_INSIDE_WIDTH
    const int CANVAS_INSIDE_COL_3_WIDTH = CANVAS_INSIDE_WIDTH - (CANVAS_INSIDE_COL_1_WIDTH + CANVAS_INSIDE_COL_2_WIDTH); // COL_3 is the 1/3 of the CANVAS_INSIDE_WIDTH
-   
+
    const int BILL_VALUE_PRECISION = 2; // 2 = 0.xx/ 3 = 0.xxx
 
    // HEADER
@@ -151,7 +151,7 @@ int main(int argc, char** argv) {
    if (fareDurationMinute <= 0) {
       // DISPLAY CANCELLATION FEE
       cout << fixed << setprecision(BILL_VALUE_PRECISION);
-      
+
       cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Frais annulation" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << cancellationFee << " " << RIGHT_BORDER << endl;
    } else {
       // Affichage ILIAS
