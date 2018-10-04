@@ -26,21 +26,21 @@ int main(int argc, char** argv) {
 
    const double VAT = 0.08; // 8%
 
-   const string UBERX_DISPLAY_NAME = "UBERX";
+   const string UBERX_DISPLAY_NAME = "uberX";
    const double UBERX_BASE_FARE = 3.00;
    const double UBERX_MINIMUM_FARE = 6.00;
    const double UBERX_PER_MINUTE_FEE = 0.30;
    const double UBERX_PER_KM_FEE = 1.80;
    const double UBERX_CANCELLATION_FEE = 6.00;
 
-   const string UBERBLACK_DISPLAY_NAME = "UBERBLACK";
+   const string UBERBLACK_DISPLAY_NAME = "uberBLACK";
    const double UBERBLACK_BASE_FARE = 8.00;
    const double UBERBLACK_MINIMUM_FARE = 15.00;
    const double UBERBLACK_PER_MINUTE_FEE = 0.60;
    const double UBERBLACK_PER_KM_FEE = 3.60;
    const double UBERBLACK_CANCELLATION_FEE = 10.00;
 
-   const string UBERPOP_DISPLAY_NAME = "UBERPOP";
+   const string UBERPOP_DISPLAY_NAME = "uberPOP";
    const double UBERPOP_BASE_FARE = 3.00;
    const double UBERPOP_MINIMUM_FARE = 6.00;
    const double UBERPOP_PER_MINUTE_FEE = 0.30;
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
    double totalFee;
    double totalFeeVatValue;
 
-   cout << "Quel uber? Entrez 1 pour X, 2 pour POP ou 3 pour BLACK " << endl;
+   cout << "Quel uber? Entrez 1 pour X, 2 pour POP ou 3 pour BLACK" << endl;
    unsigned short int serviceType;
    cin >> serviceType;
 
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
          cancellationFee = UBERBLACK_CANCELLATION_FEE;
          break;
    }
-   cout << "Combien de minutes ecoulees? " << endl;
+   cout << "Combien de minutes ecoulees?" << endl;
    double fareDurationMinute;
    cin >> fareDurationMinute;
 
@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
    }
 
    // Displaying far bill
-   const char CORNER = 'o';
+   const char CORNER = '+';
    const char TOP_BORDER = '-';
    const char BOTTOM_BORDER = TOP_BORDER;
    const char LEFT_BORDER = '|';
@@ -139,7 +139,8 @@ int main(int argc, char** argv) {
    const int CANVAS_INSIDE_COL_3_WIDTH = CANVAS_INSIDE_WIDTH - (CANVAS_INSIDE_COL_1_WIDTH + CANVAS_INSIDE_COL_2_WIDTH); // COL_3 is the 1/3 of the CANVAS_INSIDE_WIDTH
 
    const int BILL_VALUE_PRECISION = 2; // 2 = 0.xx/ 3 = 0.xxx
-
+   
+   cout << endl;
    // HEADER
    cout << setfill(TOP_BORDER);
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CORNER << setw(CANVAS_TOTAL_WIDTH / 2) << right << CORNER << endl;
@@ -169,7 +170,7 @@ int main(int argc, char** argv) {
 
       if (subTotalFee < minimumFee) {
          cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
-         cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Course minimale" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << minimumFee << " " << RIGHT_BORDER << endl;
+         cout << LEFT_BORDER << setw(CANVAS_INSIDE_COL_1_WIDTH) << left << " Course mimimale" << setw(CANVAS_INSIDE_COL_2_WIDTH) << COLUMN_SEPARATOR << setw(CANVAS_INSIDE_COL_3_WIDTH - 1) << right << minimumFee << " " << RIGHT_BORDER << endl;
       }
    }
 
@@ -180,7 +181,8 @@ int main(int argc, char** argv) {
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << LEFT_BORDER << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
    cout << setfill(BOTTOM_BORDER);
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CORNER << setw(CANVAS_TOTAL_WIDTH / 2) << right << CORNER << endl;
-
+   
+   cout << endl;
 
 
    return 0;
