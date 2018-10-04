@@ -22,31 +22,31 @@ using namespace std;
 /*
  * 
  */
-int main() {
-
-   double const VAT = 0.08; // 8% 
-
-   string const UBERX_DISPLAY_NAME = "UBERX";
-   double const UBERX_BASE_FARE = 3.00;
-   double const UBERX_MINIMUM_FARE = 6.00;
-   double const UBERX_PER_MINUTE_FEE = 0.30;
-   double const UBERX_PER_KM_FEE = 1.80;
-   double const UBERX_CANCELLATION_FEE = 6.00;
-
-   string const UBERBLACK_DISPLAY_NAME = "UBERBLACK";
-   double const UBERBLACK_BASE_FARE = 8.00;
-   double const UBERBLACK_MINIMUM_FARE = 15.00;
-   double const UBERBLACK_PER_MINUTE_FEE = 0.60;
-   double const UBERBLACK_PER_KM_FEE = 3.60;
-   double const UBERBLACK_CANCELLATION_FEE = 10.00;
-
-   string const UBERPOP_DISPLAY_NAME = "UBERPOP";
-   double const UBERPOP_BASE_FARE = 3.00;
-   double const UBERPOP_MINIMUM_FARE = 6.00;
-   double const UBERPOP_PER_MINUTE_FEE = 0.30;
-   double const UBERPOP_PER_KM_FEE = 1.35;
-   double const UBERPOP_CANCELLATION_FEE = 6.00;
-
+int main(int argc, char** argv) {
+   
+   const double VAT = 0.08; // 8%
+   
+   const string UBERX_DISPLAY_NAME = "UBERX";
+   const double UBERX_BASE_FARE = 3.00;
+   const double UBERX_MINIMUM_FARE = 6.00;
+   const double UBERX_PER_MINUTE_FEE = 0.30;
+   const double UBERX_PER_KM_FEE = 1.80;
+   const double UBERX_CANCELLATION_FEE = 6.00;
+   
+   const string UBERBLACK_DISPLAY_NAME = "UBERBLACK";
+   const double UBERBLACK_BASE_FARE = 8.00;
+   const double UBERBLACK_MINIMUM_FARE = 15.00;
+   const double UBERBLACK_PER_MINUTE_FEE = 0.60;
+   const double UBERBLACK_PER_KM_FEE = 3.60;
+   const double UBERBLACK_CANCELLATION_FEE = 10.00;
+   
+   const string UBERPOP_DISPLAY_NAME = "UBERPOP";
+   const double UBERPOP_BASE_FARE = 3.00;
+   const double UBERPOP_MINIMUM_FARE = 6.00;
+   const double UBERPOP_PER_MINUTE_FEE = 0.30;
+   const double UBERPOP_PER_KM_FEE = 1.35;
+   const double UBERPOP_CANCELLATION_FEE = 6.00;
+   
    string displayName;
    double baseFee;
    double minimumFee;
@@ -63,31 +63,40 @@ int main() {
    cout << "Quel uber? Entrez 1 pour X, 2 pour POP ou 3 pour BLACK " << endl;
    unsigned short int serviceType;
    cin >> serviceType;
-
-   if (serviceType == 1) {
-      displayName = UBERX_DISPLAY_NAME;
-      baseFee = UBERX_BASE_FARE;
-      minimumFee = UBERX_MINIMUM_FARE;
-      perMinuteFee = UBERX_PER_MINUTE_FEE;
-      perKmFee = UBERX_PER_KM_FEE;
-      cancellationFee = UBERX_CANCELLATION_FEE;
-   } else if (serviceType == 2) {
-      displayName = UBERPOP_DISPLAY_NAME;
-      baseFee = UBERPOP_BASE_FARE;
-      minimumFee = UBERPOP_MINIMUM_FARE;
-      perMinuteFee = UBERPOP_PER_MINUTE_FEE;
-      perKmFee = UBERPOP_PER_KM_FEE;
-      cancellationFee = UBERPOP_CANCELLATION_FEE;
-   } else if (serviceType == 3) {
-      displayName = UBERBLACK_DISPLAY_NAME;
-      baseFee = UBERBLACK_BASE_FARE;
-      minimumFee = UBERBLACK_MINIMUM_FARE;
-      perMinuteFee = UBERBLACK_PER_MINUTE_FEE;
-      perKmFee = UBERBLACK_PER_KM_FEE;
-      cancellationFee = UBERBLACK_CANCELLATION_FEE;
+   
+   enum ServiceType {
+      UBERX = 1,
+      UBERPOP = 2,
+      UBERBLACK = 3
+   };
+   
+   switch (serviceType) {
+      case UBERX:
+         displayName = UBERX_DISPLAY_NAME;
+         baseFee = UBERX_BASE_FARE;
+         minimumFee = UBERX_MINIMUM_FARE;
+         perMinuteFee = UBERX_PER_MINUTE_FEE;
+         perKmFee = UBERX_PER_KM_FEE;
+         cancellationFee = UBERX_CANCELLATION_FEE;
+         break;
+      case UBERPOP:
+         displayName = UBERPOP_DISPLAY_NAME;
+         baseFee = UBERPOP_BASE_FARE;
+         minimumFee = UBERPOP_MINIMUM_FARE;
+         perMinuteFee = UBERPOP_PER_MINUTE_FEE;
+         perKmFee = UBERPOP_PER_KM_FEE;
+         cancellationFee = UBERPOP_CANCELLATION_FEE;
+         break;
+      case UBERBLACK:
+         displayName = UBERBLACK_DISPLAY_NAME;
+         baseFee = UBERBLACK_BASE_FARE;
+         minimumFee = UBERBLACK_MINIMUM_FARE;
+         perMinuteFee = UBERBLACK_PER_MINUTE_FEE;
+         perKmFee = UBERBLACK_PER_KM_FEE;
+         cancellationFee = UBERBLACK_CANCELLATION_FEE;
+         break;
    }
-
-   cout << "Combien de minutes ecoulees? " << endl;
+   
    double fareDurationMinute;
    cin >> fareDurationMinute;
 
