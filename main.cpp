@@ -64,29 +64,37 @@ int main(int argc, char** argv) {
    unsigned short int serviceType;
    cin >> serviceType;
    
-   if (serviceType == 1) {
-      displayName = UBERX_DISPLAY_NAME;
-      baseFee = UBERX_BASE_FARE;
-      minimumFee = UBERX_MINIMUM_FARE;
-      perMinuteFee = UBERX_PER_MINUTE_FEE;
-      perKmFee = UBERX_PER_KM_FEE;
-      cancellationFee = UBERX_CANCELLATION_FEE;
-   }
-   else if (serviceType == 2) {
-      displayName = UBERPOP_DISPLAY_NAME;
-      baseFee = UBERPOP_BASE_FARE;
-      minimumFee = UBERPOP_MINIMUM_FARE;
-      perMinuteFee = UBERPOP_PER_MINUTE_FEE;
-      perKmFee = UBERPOP_PER_KM_FEE;
-      cancellationFee = UBERPOP_CANCELLATION_FEE;
-   }
-   else if (serviceType == 3) {
-      displayName = UBERBLACK_DISPLAY_NAME;
-      baseFee = UBERBLACK_BASE_FARE;
-      minimumFee = UBERBLACK_MINIMUM_FARE;
-      perMinuteFee = UBERBLACK_PER_MINUTE_FEE;
-      perKmFee = UBERBLACK_PER_KM_FEE;
-      cancellationFee = UBERBLACK_CANCELLATION_FEE;
+   enum ServiceType {
+      UBERX = 1,
+      UBERPOP = 2,
+      UBERBLACK = 3
+   };
+   
+   switch (serviceType) {
+      case UBERX:
+         displayName = UBERX_DISPLAY_NAME;
+         baseFee = UBERX_BASE_FARE;
+         minimumFee = UBERX_MINIMUM_FARE;
+         perMinuteFee = UBERX_PER_MINUTE_FEE;
+         perKmFee = UBERX_PER_KM_FEE;
+         cancellationFee = UBERX_CANCELLATION_FEE;
+         break;
+      case UBERPOP:
+         displayName = UBERPOP_DISPLAY_NAME;
+         baseFee = UBERPOP_BASE_FARE;
+         minimumFee = UBERPOP_MINIMUM_FARE;
+         perMinuteFee = UBERPOP_PER_MINUTE_FEE;
+         perKmFee = UBERPOP_PER_KM_FEE;
+         cancellationFee = UBERPOP_CANCELLATION_FEE;
+         break;
+      case UBERBLACK:
+         displayName = UBERBLACK_DISPLAY_NAME;
+         baseFee = UBERBLACK_BASE_FARE;
+         minimumFee = UBERBLACK_MINIMUM_FARE;
+         perMinuteFee = UBERBLACK_PER_MINUTE_FEE;
+         perKmFee = UBERBLACK_PER_KM_FEE;
+         cancellationFee = UBERBLACK_CANCELLATION_FEE;
+         break;
    }
    
    cout << "Combien de minutes ecoulees? ";
