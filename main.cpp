@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
       totalFeeVatValue = totalFee - totalFee / (1 + VAT);
    }
 
-   // Displaying far bill
+   // Displaying fare bill
    const char CANVAS_CORNER = '+';
    const char CANVAS_TOP_BORDER = '-';
    const char CANVAS_BOTTOM_BORDER = '-';
@@ -148,9 +148,12 @@ int main(int argc, char** argv) {
    cout << setfill(CANVAS_TOP_BORDER);
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_CORNER
          << setw(CANVAS_TOTAL_WIDTH / 2) << right << CANVAS_CORNER << endl;
+
    cout << setfill(' ');
+
    cout << setw(CANVAS_TOTAL_WIDTH - CANVAS_LEFT_BORDER.length())
          << left << CANVAS_LEFT_BORDER << right << RIGHT_BORDER << endl;
+
    cout << setw(CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2)
          << left << CANVAS_LEFT_BORDER << setw(displayName.length())
          << left << displayName
@@ -158,12 +161,14 @@ int main(int argc, char** argv) {
                   - (CANVAS_TOTAL_WIDTH / 2 - displayName.length() / 2
                   + displayName.length()))
          << right << RIGHT_BORDER << endl;
+
    cout << setw(CANVAS_TOTAL_WIDTH - CANVAS_LEFT_BORDER.length())
          << left << CANVAS_LEFT_BORDER << right << RIGHT_BORDER << endl;
    
    // Displaying the cancellation part 
    if (fareDurationMinute <= 0) {
       cout << fixed << setprecision(BILL_VALUE_PRECISION);
+      
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "Frais annulation" << setw(CANVAS_WIDTH_COLUMN_2)
@@ -181,6 +186,7 @@ int main(int argc, char** argv) {
                      - CANVAS_SUFFIX_KM.length()
                      - RIGHT_BORDER.length())
             << right << fareKm << CANVAS_SUFFIX_KM << RIGHT_BORDER << endl;
+      
       cout << CANVAS_LEFT_BORDER 
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "temps ecoule" << setw(CANVAS_WIDTH_COLUMN_2)
@@ -190,27 +196,33 @@ int main(int argc, char** argv) {
                      - RIGHT_BORDER.length())
             << right << ceil(fareDurationMinute) << CANVAS_SUFFIX_TIME
             << RIGHT_BORDER << endl;
+      
       cout << fixed << setprecision(BILL_VALUE_PRECISION);
+      
       cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_LEFT_BORDER
             << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+      
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "Prix de base" << setw(CANVAS_WIDTH_COLUMN_2)
             << CANVAS_COLUMN_SEPARATOR
             << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
             << right << baseFee << RIGHT_BORDER << endl;
+      
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "Prix distance" << setw(CANVAS_WIDTH_COLUMN_2)
             << CANVAS_COLUMN_SEPARATOR
             << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
             << right << totalDistanceFee << RIGHT_BORDER << endl;
+      
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "Prix temps" << setw(CANVAS_WIDTH_COLUMN_2)
             << CANVAS_COLUMN_SEPARATOR
             << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
             << right << totalDurationFee << RIGHT_BORDER << endl;
+      
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
             << left << "Total" << setw(CANVAS_WIDTH_COLUMN_2)
@@ -222,6 +234,7 @@ int main(int argc, char** argv) {
       if (subTotalFee < minimumFee) {
          cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_LEFT_BORDER
                << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+      
          cout << CANVAS_LEFT_BORDER
                << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
                << left << "Course mimimale" << setw(CANVAS_WIDTH_COLUMN_2)
@@ -234,20 +247,25 @@ int main(int argc, char** argv) {
    // Displaying the footer part (total and VAT)
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_LEFT_BORDER
          << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+   
    cout << CANVAS_LEFT_BORDER
          << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
          << left << "Prix" << setw(CANVAS_WIDTH_COLUMN_2) << CANVAS_COLUMN_SEPARATOR
          << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
          << right << totalFee << RIGHT_BORDER << endl;
+   
    cout << CANVAS_LEFT_BORDER
          << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
          << left << "(incl. TVA)" << setw(CANVAS_WIDTH_COLUMN_2)
          << CANVAS_COLUMN_SEPARATOR
          << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
          << right << totalFeeVatValue << RIGHT_BORDER << endl;
+   
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_LEFT_BORDER
          << setw(CANVAS_TOTAL_WIDTH / 2) << right << RIGHT_BORDER << endl;
+   
    cout << setfill(CANVAS_BOTTOM_BORDER);
+   
    cout << setw(CANVAS_TOTAL_WIDTH / 2) << left << CANVAS_CORNER
          << setw(CANVAS_TOTAL_WIDTH / 2) << right << CANVAS_CORNER << endl;
    
