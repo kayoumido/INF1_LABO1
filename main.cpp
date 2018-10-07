@@ -111,12 +111,13 @@ int main(int argc, char** argv) {
       // round to the nearest 0.X (eg: 0.14 => 0.1 ; 0.16 => 0.2)
       fareKm = round(fareKm * 10) / 10;
 
-      // calc sub total
+      // calculate distance and duration fees
       totalDistanceFee = fareKm * perKmFee;
       totalDurationFee = ceil(fareDurationMinute) * perMinuteFee;
 
+      // calculate subtotal
       totalFee = subTotalFee = baseFee + totalDistanceFee + totalDurationFee;
-      // AFFICHER CONTENU FACTURE
+      // check if the course cost is lower than the minimum price
       if (subTotalFee < minimumFee) {
          totalFee = minimumFee;
          //AFFICHER LIGNE SUPP SI PRIX MINIMUM PAS DEPASSER
