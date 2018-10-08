@@ -112,10 +112,11 @@ int main() {
       // Calculate fee for the distance and time it took
       totalDistanceFee = fareKm * perKmFee;
       totalDurationFee = ceil(fareDurationMinute) * perMinuteFee;
-
+      
       totalFee = subTotalFee = baseFee + totalDistanceFee + totalDurationFee;
+      
       // Check if the course cost is lower than the minimum price
-      // If it is, set the total fee to the minimum vakue
+      // If it is, set the total fee to the minimum value
       if (subTotalFee < minimumFee) {
          totalFee = minimumFee;
       }
@@ -135,7 +136,7 @@ int main() {
    const int CANVAS_WIDTH_COLUMN_1 = 19;
    const int CANVAS_WIDTH_COLUMN_2 = 1;
    const int CANVAS_WIDTH_COLUMN_3 = 10;
-   // To have a everything certered and aligned, CANVAS_TOTAL_WIDTH needs to be an event number. 
+   // To have a everything centered and aligned, CANVAS_TOTAL_WIDTH needs to be an event number. 
    const int CANVAS_TOTAL_WIDTH = CANVAS_WIDTH_COLUMN_1
                                  + CANVAS_WIDTH_COLUMN_2
                                  + CANVAS_WIDTH_COLUMN_3;
