@@ -1,6 +1,6 @@
 /*
  -----------------------------------------------------------------------------------
- Laboratoire : <01>
+ Laboratoire : 01
  Fichier     : main.cpp
  Auteur(s)   : Loïc Dessaules, Ilias Goujgali, Doran Kayoumi
  Date        : 26.09.2018
@@ -19,10 +19,7 @@
 
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+int main() {
 
    const double VAT = 0.08; // 8%
 
@@ -70,6 +67,7 @@ int main(int argc, char** argv) {
       UBERBLACK = 3
    };
 
+   // set service values depending on the chosen service
    switch (serviceType) {
       case UBERX:
          displayName = UBERX_DISPLAY_NAME;
@@ -100,27 +98,26 @@ int main(int argc, char** argv) {
    double fareDurationMinute;
    cin >> fareDurationMinute;
 
-
+   // Check if the fare was canceled
+   // A time of 0 or smaller means that it was cancelled
    if (fareDurationMinute <= 0) {
       totalFee = cancellationFee;
       totalFeeVatValue = totalFee - totalFee / (1 + VAT); // 1 = 100%
    } else {
-      //ask for fare km
       cout << "Combien de kilometres parcourus?" << endl;
       cin >> fareKm;
-      // round to the nearest 0.X (eg: 0.14 => 0.1 ; 0.16 => 0.2)
+      // Round to the nearest 0.X (eg: 0.14 => 0.1 ; 0.16 => 0.2)
       fareKm = round(fareKm * 10) / 10;
 
-      // calculate distance and duration fees
+      // Calculate fee for the distance and time it took
       totalDistanceFee = fareKm * perKmFee;
       totalDurationFee = ceil(fareDurationMinute) * perMinuteFee;
 
-      // calculate subtotal
       totalFee = subTotalFee = baseFee + totalDistanceFee + totalDurationFee;
-      // check if the course cost is lower than the minimum price
+      // Check if the course cost is lower than the minimum price
+      // If it is, set the total fee to the minimum vakue
       if (subTotalFee < minimumFee) {
          totalFee = minimumFee;
-         //AFFICHER LIGNE SUPP SI PRIX MINIMUM PAS DEPASSER
       }
       totalFeeVatValue = totalFee - totalFee / (1 + VAT);
    }
@@ -129,20 +126,23 @@ int main(int argc, char** argv) {
    const char CANVAS_CORNER = '+';
    const char CANVAS_TOP_BORDER = '-';
    const char CANVAS_BOTTOM_BORDER = '-';
-   const string CANVAS_LEFT_BORDER = "| "; // Need the space after the character
-   const string RIGHT_BORDER = " |"; // Need the space before the character
+   // Adding the space after the border helps when the bill is being displayed.
+   const string CANVAS_LEFT_BORDER = "| ";
+   // Adding the space before the border helps when the bill is being displayed.
+   const string RIGHT_BORDER = " |";
    const char CANVAS_COLUMN_SEPARATOR = ':';
    
    const int CANVAS_WIDTH_COLUMN_1 = 19;
    const int CANVAS_WIDTH_COLUMN_2 = 1;
    const int CANVAS_WIDTH_COLUMN_3 = 10;
-   // CANVAS_TOTAL_WIDTH must be even to have a good display
+   // To have a everything certered and aligned, CANVAS_TOTAL_WIDTH needs to be an event number. 
    const int CANVAS_TOTAL_WIDTH = CANVAS_WIDTH_COLUMN_1
                                  + CANVAS_WIDTH_COLUMN_2
                                  + CANVAS_WIDTH_COLUMN_3;
    const string CANVAS_SUFFIX_KM = " km";
    const string CANVAS_SUFFIX_TIME = " min";
-   const int BILL_VALUE_PRECISION = 2; // 2 = 0.xx | 3 = 0.xxx
+   // 2 = 0.xx | 3 = 0.xxx
+   const int BILL_VALUE_PRECISION = 2;
    
    cout << endl;
    // Displaying the header part
@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
    cout << setw(CANVAS_TOTAL_WIDTH - CANVAS_LEFT_BORDER.length())
          << left << CANVAS_LEFT_BORDER << right << RIGHT_BORDER << endl;
    
-   // Displaying the cancellation part 
+   // Displaying the content for when thr far was cancelled
    if (fareDurationMinute <= 0) {
       cout << fixed << setprecision(BILL_VALUE_PRECISION);
       
@@ -177,7 +177,7 @@ int main(int argc, char** argv) {
             << setw(CANVAS_WIDTH_COLUMN_3 - RIGHT_BORDER.length())
             << right << cancellationFee << RIGHT_BORDER << endl;
    }
-   // Displaying the bill details (options choosen)
+   // Displaying the bill details
    else {
       cout << CANVAS_LEFT_BORDER
             << setw(CANVAS_WIDTH_COLUMN_1 - CANVAS_LEFT_BORDER.length())
